@@ -1,0 +1,39 @@
+﻿@model Churras.ViewModels.ChurrasViewModel
+
+@{
+    ViewBag.Title = "Meus Churras";
+}
+
+<h2>MeusChurras</h2>
+<ul class="churras voffset40">
+
+    @foreach (var churras in Model.UpcommingChurras)
+    {
+
+        <li>
+            <div class="date">
+                <div class="month">
+                    @churras.DateTime.ToString("MMM")
+                </div>
+                <div class="day">
+                    @churras.DateTime.ToString("d ")
+                </div>
+            </div>
+            <div class="details">
+                <span class="artist">
+                    @churras.Organizador.Name
+                </span>
+                <span class="genre">
+                    @churras.Descricao
+                </span>
+
+                <!--<button data-churras-id="@churras.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Vou?</button>-->
+                <div class="actions">
+                    <a href="@Url.Action("Detalhes", "Churras", new {churrasId = churras.Id})">
+                        Detalhes
+                    </a>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

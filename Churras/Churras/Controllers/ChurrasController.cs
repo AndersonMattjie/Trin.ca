@@ -2,6 +2,8 @@
 using Churras.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Churras.Controllers
@@ -63,5 +65,49 @@ namespace Churras.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Detalhes(int churrasId)
+        {
+            var detalhes = new ChurrasDetalhesViewModel(churrasId, _context);
+
+            return View("Detalhes", detalhes);
+        }
+
+        public ActionResult MeusChurras()
+        {
+            var userId = User.Identity.GetUserId();
+            var churras = _context.Churras
+                .Where(c => c.OrganizadorId == userId)
+                .Include(c => c.Organizador).ToList();
+
+            var viewModel = new ChurrasViewModel()
+            {
+                UpcommingChurras = churras,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Churras que eu organizei"
+            };
+
+            return View("MeusChurras", viewModel);
+        }
+
+        public ActionResult ChurrasQueEuVou()
+        {
+            var userId = User.Identity.GetUserId();
+            var churras = _context.ParticipanteChurras
+                .Where(c => c.ParticipanteId == userId)
+                .Select(c => c.Churras)
+                .Include(c => c.Organizador).ToList();
+
+            var viewModel = new ChurrasViewModel()
+            {
+                UpcommingChurras = churras,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Churras que eu Vou"
+            };
+
+            return View("ChurrasQueEuVou", viewModel);
+        }
+
+
     }
 }

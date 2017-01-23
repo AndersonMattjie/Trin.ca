@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\api\ParticipanteChurrasController.cs" />
     <Compile Include="Controllers\ChurrasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -206,9 +207,11 @@
     <Compile Include="Models\ParticipanteChurras.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ChurrasDetalhesViewModel.cs" />
     <Compile Include="ViewModels\ChurrasFormViewModel.cs" />
     <Compile Include="ViewModels\ChurrasViewModel.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
+    <Compile Include="ViewModels\ParticipanteChurrasFormViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ValorValido.cs" />
   </ItemGroup>
@@ -268,10 +271,13 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Churras\Create.cshtml" />
+    <Content Include="Views\ParticipanteChurras\Create.cshtml" />
+    <Content Include="Views\Churras\Detalhes.cshtml" />
+    <Content Include="Views\Churras\MeusChurras.cshtml" />
+    <Content Include="Views\Churras\ChurrasQueEuVou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ParticipanteChurras\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

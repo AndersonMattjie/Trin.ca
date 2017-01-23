@@ -7,6 +7,9 @@
 <ul class="churras voffset40">
     @foreach (var churras in Model.UpcommingChurras)
     {
+        @Html.ValidationSummary(true)
+
+
         <li>
             <div class="date">
                 <div class="month">
@@ -24,11 +27,21 @@
                     @churras.Descricao
                 </span>
 
-                    <button data-churras-id="@churras.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Vou?</button>
+                <!--<button data-churras-id="@churras.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Vou?</button>-->
+                <div class="actions">
+                    <a href="@Url.Action("Participar", "ParticipanteChurras", new {churrasId = churras.Id})">
+                        Participar
+                    </a>
+                    <a href="@Url.Action("Detalhes", "Churras", new {churrasId = churras.Id})">
+                        Detalhes
+                    </a>
+                </div>
             </div>
         </li>
     }
 </ul>
+
+
 
 @section scripts
 {
@@ -46,7 +59,7 @@
                             .removeClass("btn-info")
                         .addClass("btn-danger");
 
-                        alert('Something went wrong');
+                        alert('Você já está paticipando do Churras');
                     });
             });
            

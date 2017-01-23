@@ -16,6 +16,7 @@ namespace Churras.Controllers
             _context = new ApplicationDbContext();
         }
 
+        [Authorize]
         public ActionResult Index()
         {
 

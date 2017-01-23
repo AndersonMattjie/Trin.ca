@@ -1,14 +1,13 @@
-﻿using Churras.Dtos;
-using Churras.Models;
+﻿using Churras.Models;
+using Churras.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
-using System.Web.Http;
+using System.Web.Mvc;
 
 namespace Churras.Controllers
 {
-    [Authorize]
-    public class ParticipanteChurrasController : ApiController
+    public class ParticipanteChurrasController : Controller
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,36 +16,45 @@ namespace Churras.Controllers
             _context = new ApplicationDbContext();
         }
 
-        [HttpPost]
-        public IHttpActionResult Participar(ParticipacaoDto dto)
+        // GET: ParticipanteChurras
+        public ActionResult Participar(int churrasId)
         {
             var userId = User.Identity.GetUserId();
-            if (_context.ParticipanteChurras.Any(p => p.ParticipanteId == userId && p.ChurrasId == dto.ChurrasId))
+            if (_context.ParticipanteChurras.Any(p => p.ChurrasId == churrasId && p.ParticipanteId == userId))
             {
-                return BadRequest("Ja esta participando do churras tche!");
+                ModelState.AddModelError(String.Empty, "Voce ja esta participando deste churras.");
+                return RedirectToAction("Index", "Home");
+            }
+
+            var viewModel = new ParticipanteChurrasFormViewModel
+            {
+                churrasId = churrasId
+            };
+            return View("Create", viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ParticiparChurras(ParticipanteChurrasFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", viewModel);
             }
 
             var participacao = new ParticipanteChurras
             {
-                ChurrasId = dto.ChurrasId,
-                ParticipanteId = userId
+                ParticipanteId = User.Identity.GetUserId(),
+                ChurrasId = viewModel.churrasId,
+                IsPago = viewModel.IsPago,
+                ComBebida = viewModel.ComBebida
             };
 
-            try
-            {
-                _context.ParticipanteChurras.Add(participacao);
+            _context.ParticipanteChurras.Add(participacao);
+            _context.SaveChanges();
 
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-
-            return Ok();
-
+            return RedirectToAction("Index", "Home");
         }
     }
 }

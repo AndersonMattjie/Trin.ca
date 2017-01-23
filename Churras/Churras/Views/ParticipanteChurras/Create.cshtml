@@ -1,0 +1,29 @@
+﻿@model Churras.ViewModels.ParticipanteChurrasFormViewModel
+@{
+    ViewBag.Title = "Participar de Churras";
+}
+
+<h2>Participar</h2>
+@using (Html.BeginForm("ParticiparChurras", "ParticipanteChurras"))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.churrasId)
+    <div class="form-group">
+        @Html.LabelFor(m => m.ValorContribuicao, "Valor da Contribuição")
+        @Html.TextBoxFor(m => m.ValorContribuicao, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ValorContribuicao)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsPago, "Pago")
+        @Html.CheckBoxFor(m => m.IsPago, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.IsPago)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ComBebida, "Com Bebida")
+        @Html.CheckBoxFor(m => m.ComBebida, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ComBebida)
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Participar</button>
+}
+
