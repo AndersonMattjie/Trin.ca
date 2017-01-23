@@ -1,16 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Churras.Models;
+using System;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Churras.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public HomeController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var proximosChurras = _context.Churrascos
+                .Include(c => c.Organizador)
+                .Where(c => c.DateTime > DateTime.Now);
+
+            return View(proximosChurras);
         }
 
         public ActionResult About()

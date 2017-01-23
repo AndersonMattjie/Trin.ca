@@ -7,13 +7,13 @@ namespace Churras.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateChurrascoTable : IMigrationMetadata
+    public sealed partial class AddNameToApplicationUser : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateChurrascoTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddNameToApplicationUser));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701230334082_CreateChurrascoTable"; }
+            get { return "201701230529587_AddNameToApplicationUser"; }
         }
         
         string IMigrationMetadata.Source

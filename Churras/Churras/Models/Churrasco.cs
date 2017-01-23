@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Churras.Models
 {
+    [Table("Churrascos")]
     public class Churrasco
     {
         public int Id { get; set; }
@@ -15,9 +17,13 @@ namespace Churras.Models
         public ApplicationUser Organizador { get; set; }
 
         [Required]
-        public int OrganizadorId { get; set; }
+        public string OrganizadorId { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }
+
+        public Decimal ValorComBebida { get; set; }
+
+        public Decimal ValorSemBebida { get; set; }
     }
 }

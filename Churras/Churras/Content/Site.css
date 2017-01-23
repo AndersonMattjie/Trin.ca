@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 90px;
     padding-bottom: 20px;
 }
 
@@ -21,4 +21,157 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+span.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
+
+.lb-sm {
+  font-size: 12px;
+}
+
+.lb-md {
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.lb-lg {
+  font-size: 20px;
+}
+
+.voffset2{margin-top: 2px}
+.voffset5{margin-top: 5px}
+.voffset10{margin-top: 10px}
+.voffset20{margin-top: 20px}
+.voffset40{margin-top: 40px}
+.voffset80{margin-top: 80px}
+
+/* Bootstrap Overrides */
+.navbar-inverse {
+    background-color: #ff4342;
+    border-color: #ff4342;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        background-color: rgba(205, 40, 39, 0.55);
+    }
+
+.dropdown-menu {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+body {
+    font-size: 17px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    font-size: 17px;
+    height: 44px;
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+}
+
+
+.btn {
+    /*font-size: 17px;
+    padding: 7px 20px;*/
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.churras {
+    list-style: none;
+}
+
+    .churras > li {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+        .churras > li .date {
+            background: red;
+            color: white;
+            text-align: center;
+            width: 60px;
+            -ms-border-radius: 8px;
+            border-radius: 8px;
+        }
+
+            .churras > li .date .month {
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 2px 6px;
+            }
+
+            .churras > li .date .day {
+                background: #f7f7f7;
+                color: #333;
+                font-size: 20px;
+                padding: 6px 12px;
+            }
+
+
+        .churras > li .details {
+            position: absolute;
+            top: 0;
+            left: 70px;
+        }
+
+        .churras > li .details .artist {
+            font-weight: bold;
+            display: block;
+        }
+
+        .churras > li .details .genre {
+            font-size: 15px;
+        }
+
+.churras > li .actions {
+    font-size: 15px;
+    display: none;
+}
+
+.churras > li:hover .actions{
+    display: block;
 }
