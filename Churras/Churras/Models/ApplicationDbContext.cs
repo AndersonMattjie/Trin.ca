@@ -5,8 +5,8 @@ namespace Churras.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Churrasco> Churrascos { get; set; }
-        public DbSet<ParticipanteChurrasco> ParticipanteChurrascos { get; set; }
+        public DbSet<Churras> Churras { get; set; }
+        public DbSet<ParticipanteChurras> ParticipanteChurras { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -20,8 +20,8 @@ namespace Churras.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ParticipanteChurrasco>()
-                .HasRequired(c => c.Churrasco)
+            modelBuilder.Entity<ParticipanteChurras>()
+                .HasRequired(c => c.Churras)
                 .WithMany()
                 .WillCascadeOnDelete(false);
 

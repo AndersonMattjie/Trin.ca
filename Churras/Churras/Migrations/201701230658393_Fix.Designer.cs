@@ -7,13 +7,13 @@ namespace Churras.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddParticipanteChurrascoModel : IMigrationMetadata
+    public sealed partial class Fix : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddParticipanteChurrascoModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Fix));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701230554090_AddParticipanteChurrascoModel"; }
+            get { return "201701230658393_Fix"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Churras.ViewModels
 {
-    public class ChurrascoFormViewModel
+    public class ChurrasFormViewModel
     {
         [Required(ErrorMessage = "Pra que o churras tchê?")]
         public string Descricao { get; set; }

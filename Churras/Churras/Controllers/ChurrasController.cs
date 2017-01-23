@@ -6,16 +6,16 @@ using System.Web.Mvc;
 
 namespace Churras.Controllers
 {
-    public class ChurrascosController : Controller
+    public class ChurrasController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ChurrascosController()
+        public ChurrasController()
         {
             _context = new ApplicationDbContext();
         }
 
-        // GET: Churrascos
+        // GET: Churras
         public ActionResult Index()
         {
             return View();
@@ -23,14 +23,14 @@ namespace Churras.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            var viewModel = new ChurrascoFormViewModel();
+            var viewModel = new ChurrasFormViewModel();
 
             return View(viewModel);
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult Create(ChurrascoFormViewModel viewModel)
+        public ActionResult Create(ChurrasFormViewModel viewModel)
         {
 
 
@@ -39,7 +39,7 @@ namespace Churras.Controllers
                 return View("Create", viewModel);
             }
 
-            var churrasco = new Churrasco
+            var Churras = new Models.Churras
             {
                 OrganizadorId = User.Identity.GetUserId(),
                 ValorComBebida = viewModel.ValorComBebida,
@@ -51,7 +51,7 @@ namespace Churras.Controllers
 
             try
             {
-                _context.Churrascos.Add(churrasco);
+                _context.Churras.Add(Churras);
                 _context.SaveChanges();
             }
             catch (Exception e)

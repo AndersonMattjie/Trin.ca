@@ -52,12 +52,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -167,35 +179,35 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ChurrascosController.cs" />
+    <Compile Include="Controllers\ChurrasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ParticipanteChurrasController.cs" />
+    <Compile Include="Dtos\ParticipacaoDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701230450365_Initial.cs" />
-    <Compile Include="Migrations\201701230450365_Initial.Designer.cs">
-      <DependentUpon>201701230450365_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201701230658393_Fix.cs" />
+    <Compile Include="Migrations\201701230658393_Fix.Designer.cs">
+      <DependentUpon>201701230658393_Fix.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701230529587_AddNameToApplicationUser.cs" />
-    <Compile Include="Migrations\201701230529587_AddNameToApplicationUser.Designer.cs">
-      <DependentUpon>201701230529587_AddNameToApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701230554090_AddParticipanteChurrascoModel.cs" />
-    <Compile Include="Migrations\201701230554090_AddParticipanteChurrascoModel.Designer.cs">
-      <DependentUpon>201701230554090_AddParticipanteChurrascoModel.cs</DependentUpon>
+    <Compile Include="Migrations\201701230718349_NewAttrParticipanteChurras.cs" />
+    <Compile Include="Migrations\201701230718349_NewAttrParticipanteChurras.Designer.cs">
+      <DependentUpon>201701230718349_NewAttrParticipanteChurras.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Churrasco.cs" />
+    <Compile Include="Models\Churras.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ParticipanteChurrasco.cs" />
+    <Compile Include="Models\ParticipanteChurras.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ChurrascoFormViewModel.cs" />
+    <Compile Include="ViewModels\ChurrasFormViewModel.cs" />
+    <Compile Include="ViewModels\ChurrasViewModel.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ValorValido.cs" />
@@ -255,10 +267,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Churrascos\Create.cshtml" />
+    <Content Include="Views\Churras\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ParticipanteChurras\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -269,14 +282,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701230450365_Initial.resx">
-      <DependentUpon>201701230450365_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701230658393_Fix.resx">
+      <DependentUpon>201701230658393_Fix.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701230529587_AddNameToApplicationUser.resx">
-      <DependentUpon>201701230529587_AddNameToApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701230554090_AddParticipanteChurrascoModel.resx">
-      <DependentUpon>201701230554090_AddParticipanteChurrascoModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701230718349_NewAttrParticipanteChurras.resx">
+      <DependentUpon>201701230718349_NewAttrParticipanteChurras.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

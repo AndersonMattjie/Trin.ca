@@ -3,12 +3,12 @@ namespace Churras.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class Fix : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Churrascos",
+                "dbo.Churras",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -28,6 +28,7 @@ namespace Churras.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 100),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -82,6 +83,19 @@ namespace Churras.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.ParticipanteChurras",
+                c => new
+                    {
+                        ChurrasId = c.Int(nullable: false),
+                        ParticipanteId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.ChurrasId, t.ParticipanteId })
+                .ForeignKey("dbo.Churras", t => t.ChurrasId)
+                .ForeignKey("dbo.AspNetUsers", t => t.ParticipanteId, cascadeDelete: true)
+                .Index(t => t.ChurrasId)
+                .Index(t => t.ParticipanteId);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -96,23 +110,28 @@ namespace Churras.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Churrascos", "OrganizadorId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.ParticipanteChurras", "ParticipanteId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.ParticipanteChurras", "ChurrasId", "dbo.Churras");
+            DropForeignKey("dbo.Churras", "OrganizadorId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.ParticipanteChurras", new[] { "ParticipanteId" });
+            DropIndex("dbo.ParticipanteChurras", new[] { "ChurrasId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Churrascos", new[] { "OrganizadorId" });
+            DropIndex("dbo.Churras", new[] { "OrganizadorId" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.ParticipanteChurras");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Churrascos");
+            DropTable("dbo.Churras");
         }
     }
 }

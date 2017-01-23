@@ -1,4 +1,5 @@
 ﻿using Churras.Models;
+using Churras.ViewModels;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -17,11 +18,21 @@ namespace Churras.Controllers
 
         public ActionResult Index()
         {
-            var proximosChurras = _context.Churrascos
+
+
+
+            var proximosChurras = _context.Churras
                 .Include(c => c.Organizador)
                 .Where(c => c.DateTime > DateTime.Now);
 
-            return View(proximosChurras);
+            var viewModel = new ChurrasViewModel()
+            {
+                UpcommingChurras = proximosChurras,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Proximos Churras"
+            };
+
+            return View("Index", viewModel);
         }
 
         public ActionResult About()
